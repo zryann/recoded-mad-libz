@@ -27,9 +27,43 @@
  * Please go through this lesson: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/
  */
 function parseStory(rawStory) {
-  // Your code here.
-  return {}; // This line is currently wrong :)
+    const arrStory=rawStory.split(" ");
+    const fixedArray=[];
+    for(let e of arrStory){
+      if(/[[]a]/.test(e) && /[.,]/.test(e)){
+      fixedArray.push({word:e.replace("[a]","").substring(0,e.length-1),pos:"adj"});
+      fixedArray.push({word:e.substring(e.length-1)})
+      }
+      else if(/[[]a]/.test(e) && !(/[.,]/.test(e))){
+        fixedArray.push({word:e.replace("[a]",""),pos:"adj"});
+      }
+      else if(/[[]v]/.test(e) && /[.,]/.test(e)){
+        fixedArray.push({word:e.replace("[v]","").substring(0,e.length-1),pos:"verb"});
+        fixedArray.push({word:e.substring(e.length-1)})
+        }
+      else if(/[[]v]/.test(e) && !/[.,]/.test(e)){
+        fixedArray.push({word:e.replace("[v]",""),pos:"verb"});
+      }
+      else if(/[[]n]/.test(e) && /[.,]/.test(e)){
+        fixedArray.push({word:e.replace("[n]","").substring(0,e.length-1),pos:"noun"});
+        fixedArray.push({word:e.substring(e.length-1)})
+        }
+      else if(/[[]n]/.test(e) && !/[.,]/.test(e)){
+        fixedArray.push({word:e.replace("[n]",""),pos:"noun"});
+      }
+      else if(/[.,]/.test(e)){
+        fixedArray.push({word:e.replace("\n","").substring(0,e.length-1)});
+        fixedArray.push({word:e.substring(e.length-1)})
+      }
+      else{
+        fixedArray.push({word:e.replace("\n","")});
+      }
+    }
+    return fixedArray;
 }
+
+
+
 
 /**
  * All your other JavaScript code goes here, inside the function. Don't worry about
@@ -42,8 +76,49 @@ function parseStory(rawStory) {
  *
  * You'll want to use the results of parseStory() to display the story on the page.
  */
+
 getRawStory()
   .then(parseStory)
   .then((processedStory) => {
     console.log(processedStory);
-  });
+  const madLibsEdit=document.querySelector(".madLibsEdit");
+  const madLibsPreview=document.querySelector(".madLibsPreview");
+  const pEdit=document.createElement('p');
+  const pPrev=document.createElement('p');
+  madLibsEdit.append(pEdit);
+  madLibsPreview.append(pPrev);
+ 
+  for(let wp of processedStory){
+    if(wp.pos!=undefined){
+    const input=document.createElement('input');
+    const input2=document.createElement('input');
+    pEdit.appendChild(input);
+    pPrev.appendChild(input2);
+    input.placeholder=wp.pos;
+    input2.placeholder=wp.pos;
+    input.maxLength=20;
+    input2.readOnly=true;
+    input.addEventListener('input',()=>{
+      input2.value=input.value;
+    });
+      input.addEventListener('keydown', e => {
+          if(e.keyCode === 13) {
+              let nextEl = input.nextElementSibling;
+              if(nextEl!=null){
+              if(nextEl.nodeName === 'INPUT') {
+                  nextEl.focus();
+              }else {
+                  alert('done');
+              }
+          }
+        }
+      });
+    }
+    else{
+      pEdit.append(`${wp.word} `);
+      pPrev.append(`${wp.word} `);
+    }
+   }
+  
+    
+});

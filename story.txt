@@ -1,3 +1,7 @@
-Louis[n] went[v] to the store[n], and it was fun[a]. He taught[v] the class[n].
-The abbreviation[n] "n" means[v] noun. We use[v] the letter[n] "v" for verbs.
-And for "a", you can[v] make a good[a] guess.
+There was once a hare[n] who was friends with a tortoise[n]. 
+One day, he challenged[v] the tortoise to a race[v]. 
+Seeing how slow[a] the tortoise was going, 
+the hare thought he’ll win[v] this easily. 
+So he[n] took a nap while the tortoise kept on going. 
+When the hare[n] woke up, he saw that the tortoise was already at the finish line. Much to his chagrin, 
+the tortoise won the race[n] while he was busy sleeping[v].
