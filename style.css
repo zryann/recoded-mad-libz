@@ -8,9 +8,11 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url(img/background.jpg);
+    background-image: url(img/background.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+   background-size: cover;
 }
-
 
 .madLibsEdit,.madLibsPreview{
     width: 1000px;
