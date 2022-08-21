@@ -114,9 +114,15 @@ getRawStory()
         }
       });
     }
-    else{
-      pEdit.append(`${wp.word} `);
-      pPrev.append(`${wp.word} `);
+    else{ 
+      if(wp.word=="," || wp.word=="."){
+        pEdit.append(`${wp.word}`);
+       pPrev.append(`${wp.word}`);
+      }
+      else{
+      pEdit.append(` ${wp.word}`);
+      pPrev.append(` ${wp.word}`);
+      }
     }
    }
   
