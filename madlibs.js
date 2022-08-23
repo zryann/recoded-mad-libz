@@ -26,43 +26,50 @@
  * There are multiple ways to do this, but you may want to use regular expressions.
  * Please go through this lesson: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/
  */
-function parseStory(rawStory) {
-    const arrStory=rawStory.split(" ");
-    const fixedArray=[];
-    for(let e of arrStory){
-      if(/[[]a]/.test(e) && /[.,]/.test(e)){
-      fixedArray.push({word:e.replace("[a]","").substring(0,e.length-1),pos:"adj"});
-      fixedArray.push({word:e.substring(e.length-1)})
-      }
-      else if(/[[]a]/.test(e) && !(/[.,]/.test(e))){
-        fixedArray.push({word:e.replace("[a]",""),pos:"adj"});
-      }
-      else if(/[[]v]/.test(e) && /[.,]/.test(e)){
-        fixedArray.push({word:e.replace("[v]","").substring(0,e.length-1),pos:"verb"});
-        fixedArray.push({word:e.substring(e.length-1)})
-        }
-      else if(/[[]v]/.test(e) && !/[.,]/.test(e)){
-        fixedArray.push({word:e.replace("[v]",""),pos:"verb"});
-      }
-      else if(/[[]n]/.test(e) && /[.,]/.test(e)){
-        fixedArray.push({word:e.replace("[n]","").substring(0,e.length-1),pos:"noun"});
-        fixedArray.push({word:e.substring(e.length-1)})
-        }
-      else if(/[[]n]/.test(e) && !/[.,]/.test(e)){
-        fixedArray.push({word:e.replace("[n]",""),pos:"noun"});
-      }
-      else if(/[.,]/.test(e)){
-        fixedArray.push({word:e.replace("\n","").substring(0,e.length-1)});
-        fixedArray.push({word:e.substring(e.length-1)})
-      }
-      else{
-        fixedArray.push({word:e.replace("\n","")});
-      }
+ function parseStory(rawStory) {
+  // Your code here.
+  let dot = /[.]/g;
+  let comma = /[,] /g;
+  let noun = /\[n\]/;
+  let verb = /\[v\]/;
+  let adj = /\[a\]/;
+
+  const objArr = [];
+
+  rawStory = rawStory.replace(dot, " .");
+  rawStory = rawStory.replace(comma, " , ");
+  let splitArr = rawStory.split(" ");
+  splitArr.forEach(a => {
+    if (noun.test(a)) {
+      const obj = {};
+      obj["word"] = a.slice(0, a.length - 3);
+      obj["pos"] = "noun";
+      objArr.push(obj);
+
     }
-    return fixedArray;
-}
+    else if (verb.test(a)) {
+      const obj = {};
+      obj["word"] = a.slice(0, a.length - 3);
+      obj["pos"] = "verb";
+      objArr.push(obj);
+    }
+    else if (adj.test(a)) {
+      const obj = {};
+      obj["word"] = a.slice(0, a.length - 3);
+      obj["pos"] = "adj";
+      objArr.push(obj);
+    }
 
 
+    else {
+      const obj = {};
+      obj["word"] = a;
+      objArr.push(obj);
+
+    }
+  })
+  return objArr;
+ }
 
 
 /**
