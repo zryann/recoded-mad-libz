@@ -2,17 +2,6 @@
     margin: 0;
     padding: 0;
 }
-h1{
-    font-family: "Trebuchet MS", sans-serif;
-    font-size: 5em;
-    letter-spacing: -2px;
-    border-bottom: 3px solid whitesmoke;
-    text-transform: uppercase;
-    color: whitesmoke;
-    -webkit-text-stroke: 2px black; /* width and color */
-    font-family: sans; color: whitesmoke;
-  }
-
 body{
     display: flex;
     flex-direction: column;
@@ -23,7 +12,16 @@ body{
     background-attachment: fixed;
    background-size: cover;
 }
-
+h1{
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 5em;
+    letter-spacing: -2px;
+    border-bottom: 3px solid whitesmoke;
+    text-transform: uppercase;
+    color: whitesmoke;
+    -webkit-text-stroke: 2px black; /* width and color */
+    font-family: sans; color: whitesmoke;
+  }
 .madLibsEdit,.madLibsPreview{
     width: 800px;
     margin: 20px 0 0 0;

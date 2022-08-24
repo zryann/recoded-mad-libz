@@ -35,7 +35,9 @@ function findPOS(pos){
   const fixedPOS=pos.replace("[","").replace("]","");
   return POS[fixedPOS];
 }
+
 const OUR_REGEX=/(?<word>\w+)(?<pos>\[[nva]\])?(?<punc>[\.,])?/;
+
 function parseStory(rawStory) {
     const arrStory=rawStory.split(" ");
     const fixedArray=[];
@@ -124,9 +126,7 @@ function parseStory(rawStory) {
 getRawStory()
   .then(parseStory)
   .then((processedStory) => {
-
-    console.log(processedStory);
-
+  console.log(processedStory);
   const madLibsEdit=document.querySelector(".madLibsEdit");
   const madLibsPreview=document.querySelector(".madLibsPreview");
   const pEdit=document.createElement('p');
@@ -135,29 +135,30 @@ getRawStory()
   madLibsPreview.append(pPrev);
   for(let wp of processedStory){
     if(wp.pos!=undefined){
-    const input=document.createElement('input');
-    const input2=document.createElement('input');
-    pEdit.appendChild(input);
-    pPrev.appendChild(input2);
-    input.placeholder=wp.pos;
-    input2.placeholder=wp.pos;
-    input.maxLength=20;
-    input2.readOnly=true;
+    const inputEdit=document.createElement('input');
+    const inputPrev=document.createElement('input');
+    pEdit.appendChild(inputEdit);
+    pPrev.appendChild(inputPrev);
+    inputEdit.placeholder=wp.pos;
+    inputPrev.placeholder=wp.pos;
+    inputEdit.maxLength=20;
+    inputPrev.readOnly=true;
     
-    input.addEventListener('input',()=>{
-      input2.value=input.value;
+    inputEdit.addEventListener('input',()=>{
+      inputPrev.value=inputEdit.value;
     });
     
-    input.addEventListener('keydown', e => {
+    inputEdit.addEventListener('keydown', e => {
       if(e.keyCode === 13) {
-        let nextEl = input.nextElementSibling;
+        let nextEl = inputEdit.nextElementSibling;
             if(nextEl!=null){
               if(nextEl.nodeName === 'INPUT') {
               nextEl.focus();
-               }else {
-                  alert('done');
-              }
+               }
           }
+          else {
+            alert('Done!!!');
+        }
         }
       });
     }
